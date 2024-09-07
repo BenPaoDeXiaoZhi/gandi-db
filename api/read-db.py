@@ -7,5 +7,11 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type','text/plain')
         self.end_headers()
-        self.wfile.write(self.path.encode('utf-8'))
+        headers={
+            'Content-Type':'application/json',
+            'version':'1.1'
+        }
+        url='https://community-web-cloud-database.ccw.site/cloud_variable/detail/v2'
+        req=requests.post(url,headers=headers)
+        self.wfile.write(req.text.encode('utf-8'))
         return
